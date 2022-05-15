@@ -22,7 +22,7 @@ const Response = ({ requests, request, setRequests }) => {
             <div className='flex p-3'>
                 <div className='px-3  font-bold'>
                     Prompt:
-                </div> Please generate a review for a {request.clothing} that fit {request.fit} {(request.request).length > 1 ? `it also includes these details such as ${request.request}` : ''} </div>
+                </div> Please generate a review for a {request.clothing} that fit {request.fit} {(request.request).length > 1 ? `it also includes details such as ${request.request}` : ''} </div>
             <div className='flex p-3'>
                 <div className='px-3  font-bold'>
                     Answer:  </div>  {request.response}

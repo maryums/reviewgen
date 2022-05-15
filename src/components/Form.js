@@ -2,34 +2,21 @@ import React, { useState, useEffect } from 'react'
 import { nanoid } from 'nanoid';
 
 
-const API_KEY = process.env.REACT_APP_API_KEY;
 
-const Form = ({ saveRequests, formData, inputText, setInputText, setInputReply, setFormData }) => {
 
-    const handleChange = (event) => {
-        const { name, value, type, checked } = event.target
-        setFormData(prevFormData => {
-            return {
-                ...prevFormData,
-                [name]: type === "checkbox" ? checked : value
-            }
-        })
-    }
-
-    const handleInputText = (e) => {
-        setInputText(e.target.value)
-    }
+const Form = ({ saveRequests, formData, setFormData }) => {
+    const API_KEY = process.env.REACT_APP_API_KEY
 
     let recommend;
 
     if (formData.wouldRecommend) {
-        recommend = 'I would recommend this product'
+        recommend = 'I would recommend it'
     } else {
-        recommend = 'I would not recommend it'
+        recommend = ''
     }
 
     const data = {
-        prompt: `Write a long review for this type of clothing: ${formData.clothing} that fits too ${formData.fit} and ${recommend} and include details such as ${inputText} `,
+        prompt: `Write a long review for this type of clothing: ${formData.clothing} that fits too ${formData.fit}. ${recommend}. Also include details such as ${formData.request} `,
         temperature: 0.5,
         max_tokens: 64,
         top_p: 1.0,
@@ -52,14 +39,15 @@ const Form = ({ saveRequests, formData, inputText, setInputText, setInputReply, 
         fetch("https://api.openai.com/v1/engines/text-curie-001/completions", requestOptions)
             .then(response => response.json())
             .then(data => {
-                const apiReply = (data.choices[0].text)
+                const reply = (data.choices[0].text)
+                const request = (formData.request)
                 const clothing = (formData.clothing)
                 const fit = (formData.fit)
                 const wouldRecommend = (formData.wouldRecommend)
 
                 const newRequest = {
-                    request: inputText,
-                    response: apiReply,
+                    request: request,
+                    response: reply,
                     clothing: clothing,
                     fit: fit,
                     wouldRecommend: wouldRecommend,
@@ -71,16 +59,27 @@ const Form = ({ saveRequests, formData, inputText, setInputText, setInputReply, 
         handleReset();
     }
 
+    const handleChange = (event) => {
+        const { name, value, type, checked } = event.target
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData,
+                [name]: type === "checkbox" ? checked : value.toLowerCase()
+            }
+        })
+    }
+
+
     const handleReset = () => {
-        setInputText('')
-        setInputReply('')
         setFormData({
+            request: "",
+            reply: "",
             clothing: "",
             fit: "",
             wouldRecommend: false
         })
     }
-    console.log(data)
+
     return (
         <div>
             <form>
@@ -146,41 +145,39 @@ const Form = ({ saveRequests, formData, inputText, setInputText, setInputReply, 
 
 
                         <label
-                            htmlFor="input-prompt"
+                            htmlFor="request"
                             className="form-label inline-block mb-2 text-gray-700"
-                        >Add at least one more unique suggestion to your review.
+                        >Add at least one unique suggestion to your review.
                         </label
                         >
 
                         <input
                             type="text"
-                            onChange={(e) => handleInputText(e)}
-                            value={inputText}
-                            id="input-prompt"
+                            name="request"
+                            onChange={handleChange}
+                            value={formData.request}
+                            id="request"
                             placeholder="Suggestions for AI"
                             className="
                                     form-control
                                     block
                                     w-7/8
-                                    px-3
-                                    py-1.5
+                                    m-0
+                                    p-2
                                     text-gray-700
-                                    bg-white bg-clip-padding
                                     border border-solid border-gray-300
                                     rounded
                                     transition
                                     ease-in-out
-                                    m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                    focus:text-gray-700 focus:bg-white focus:border-[#92828d] focus:outline-none
                                     "
-
                         />
 
                     </div>
                     <input
                         onClick={(e) => handleSubmit(e)}
-                        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-                        type="submit" value="Submit" />
+                        className='bg-[#92828d] hover:bg-[#6B5A7D] text-white font-bold py-2 px-4 rounded'
+                        type="submit" value="submit" />
                 </div>
 
 

@@ -6,23 +6,22 @@ import Header from './components/Header'
 
 const App = () => {
 
-
-  const [inputText, setInputText] = useState('')
-  const [inputReply, setInputReply] = useState('')
   const [formData, setFormData] = useState(
     {
+      request: "",
+      reply: "",
       clothing: "",
       fit: "",
       wouldRecommend: false,
     }
   )
+
   const [requests, setRequests] = useState(() => {
     const saved = localStorage.getItem("requests");
     const initialValue = JSON.parse(saved);
     return initialValue || [];
   })
 
-  console.log(requests)
 
   useEffect(() => {
     localStorage.setItem("requests", JSON.stringify(requests))
@@ -38,12 +37,16 @@ const App = () => {
       <Header />
       <Form
         saveRequests={saveRequests}
-        setInputText={setInputText}
-        setInputReply={setInputReply}
-        setFormData={setFormData}
-        inputText={inputText}
-        inputReply={inputReply}
+
+
         formData={formData}
+        setFormData={setFormData}
+
+      // inputReply={inputReply}
+      // setInputReply={setInputReply}
+      // inputText={inputText}
+      // setInputText={setInputText}
+
       />
 
       <Responses
