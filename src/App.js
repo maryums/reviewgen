@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import Header from './components/Header'
 import Form from './components/Form'
 import Responses from './components/Responses'
-import Header from './components/Header'
+import Footer from './components/Footer'
 
 
 const App = () => {
@@ -12,7 +13,9 @@ const App = () => {
       reply: "",
       clothing: "",
       fit: "",
+      quality: "",
       wouldRecommend: false,
+      isQuick: false
     }
   )
 
@@ -22,11 +25,9 @@ const App = () => {
     return initialValue || [];
   })
 
-
   useEffect(() => {
     localStorage.setItem("requests", JSON.stringify(requests))
   }, [requests])
-
 
   const saveRequests = newRequest => {
     setRequests([newRequest, ...requests])
@@ -35,25 +36,18 @@ const App = () => {
   return (
     <div className="container px-3 mx-auto">
       <Header />
-      <Form
-        saveRequests={saveRequests}
-
-
-        formData={formData}
-        setFormData={setFormData}
-
-      // inputReply={inputReply}
-      // setInputReply={setInputReply}
-      // inputText={inputText}
-      // setInputText={setInputText}
-
-      />
-
-      <Responses
-        setRequests={setRequests}
-        requests={requests}
-
-      />
+      <main>
+        <Form
+          saveRequests={saveRequests}
+          formData={formData}
+          setFormData={setFormData}
+        />
+        <Responses
+          setRequests={setRequests}
+          requests={requests}
+        />
+      </main>
+      <Footer />
     </div>
   )
 }
