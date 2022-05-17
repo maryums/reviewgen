@@ -10,7 +10,7 @@ const Header = () => {
             <p className='text-center m-0'> 👕 👖🧥👗</p>
 
             <h3 className='text-center'>
-                Shopify Intern Tech Challenge Fall 2022
+                Intern Tech Challenge
             </h3>
 
             <div className="mt-5">
