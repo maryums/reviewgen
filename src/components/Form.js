@@ -92,138 +92,138 @@ const Form = ({ saveRequests, formData, setFormData }) => {
 
     return (
         <>
-            <form>
-                <div className="my-6 flex flex-col justify-center">
+            <div className="md:col-span-2 ">
+                <form data-form-type="other" className="md:pt-6 md:sticky md:top-0">
+                    <div className="my-6 flex flex-col justify-center space-y-3">
 
-                    <div className='py-3'>
-                        <label htmlFor="clothing">
-                            What did you buy?
-                        </label>
-                        <br />
-                        <select
-                            className='w-1/3'
-                            id="clothing"
-                            value={formData.clothing}
-                            onChange={handleChange}
-                            name="clothing"
+                        <div className="input-clothing-type">
+                            <label htmlFor="clothing">
+                                What did you buy?
+                            </label>
+                            <br />
+                            <select
+                                className='w-full'
+                                id="clothing"
+                                value={formData.clothing}
+                                onChange={handleChange}
+                                name="clothing"
+                            >
+
+                                <option value=""></option>
+                                <option value="t-shirt">tshirt</option>
+                                <option value="sweater">sweater</option>
+                                <option value="jeans">jeans</option>
+                                <option value="shorts">shorts</option>
+                                <option value="jacket">jacket</option>
+                            </select>
+                        </div>
+
+
+                        <div className='input-fit'>
+                            <label htmlFor="fit">
+                                How was the fit?
+                            </label>
+                            <br />
+                            <select
+                                className='w-full'
+                                id="fit"
+                                value={formData.fit}
+                                onChange={handleChange}
+                                name="fit"
+                            >
+                                <option value=""> </option>
+                                <option value="big">too big</option>
+                                <option value="small">too small</option>
+                                <option value="perfect">just right</option>
+                            </select>
+                        </div>
+
+
+
+                        <div className='input-quality'>
+                            <label htmlFor="quality">
+                                How was the fabric quality?
+                            </label>
+                            <br />
+                            <select
+                                className='w-full'
+                                id="quality"
+                                value={formData.quality}
+                                onChange={handleChange}
+                                name="quality"
+                            >
+                                <option value=""> </option>
+                                <option value="low">low quality</option>
+                                <option value="average">average </option>
+                                <option value="superb">superb</option>
+                            </select>
+                        </div>
+
+
+                        <div className='input-recommend'>
+                            <label htmlFor="wouldRecommend">Would you recommend?</label>
+                            <input
+                                className='mx-3'
+                                type="checkbox"
+                                id="wouldRecommend"
+                                checked={formData.wouldRecommend}
+                                onChange={handleChange}
+                                name="wouldRecommend"
+                            />
+                        </div>
+
+
+                        <div className='input-isquick'>
+                            <label htmlFor="isQuick">Did this ship quickly?</label>
+                            <input
+                                className='mx-3'
+                                type="checkbox"
+                                id="isQuick"
+                                checked={formData.isQuick}
+                                onChange={handleChange}
+                                name="isQuick"
+                            />
+                        </div>
+
+
+                        <label
+                            htmlFor="request"
+                            className="form-label inline-block mb-2 text-gray-700"
+                        >Add at least one unique suggestion to your review.
+                        </label
                         >
 
-                            <option value=""></option>
-                            <option value="t-shirt">tshirt</option>
-                            <option value="sweater">sweater</option>
-                            <option value="jeans">jeans</option>
-                            <option value="shorts">shorts</option>
-                            <option value="jacket">jacket</option>
-                        </select>
-                    </div>
-
-
-                    <div className='py-3'>
-                        <label htmlFor="fit">
-                            How was the fit?
-                        </label>
-                        <br />
-                        <select
-                            className='w-1/3'
-                            id="fit"
-                            value={formData.fit}
-                            onChange={handleChange}
-                            name="fit"
-                        >
-                            <option value=""> </option>
-                            <option value="big">too big</option>
-                            <option value="small">too small</option>
-                            <option value="perfect">just right</option>
-                        </select>
-                    </div>
-
-
-
-                    <div className='py-3'>
-                        <label htmlFor="quality">
-                            How was the fabric quality?
-                        </label>
-                        <br />
-                        <select
-                            className='w-1/3'
-                            id="quality"
-                            value={formData.quality}
-                            onChange={handleChange}
-                            name="quality"
-                        >
-                            <option value=""> </option>
-                            <option value="low">low quality</option>
-                            <option value="average">average </option>
-                            <option value="superb">superb</option>
-                        </select>
-                    </div>
-
-
-                    <div className='py-3'>
-                        <label htmlFor="wouldRecommend">Would you recommend?</label>
                         <input
-                            className='mx-3'
-                            type="checkbox"
-                            id="wouldRecommend"
-                            checked={formData.wouldRecommend}
+                            type="text"
+                            name="request"
                             onChange={handleChange}
-                            name="wouldRecommend"
-                        />
-                    </div>
-
-
-                    <div className='pb-3'>
-                        <label htmlFor="isQuick">Did this ship quickly?</label>
-                        <input
-                            className='mx-3'
-                            type="checkbox"
-                            id="isQuick"
-                            checked={formData.isQuick}
-                            onChange={handleChange}
-                            name="isQuick"
-                        />
-
-
-                    </div>
-
-
-                    <label
-                        htmlFor="request"
-                        className="form-label inline-block mb-2 text-gray-700"
-                    >Add at least one unique suggestion to your review.
-                    </label
-                    >
-
-                    <input
-                        type="text"
-                        name="request"
-                        onChange={handleChange}
-                        value={formData.request}
-                        id="request"
-                        placeholder="Suggestions for AI"
-                        className="
-                            form-control
-                            block
-                            -7/8
-                            m-0
-                            p-2
-                            text-gray-700
-                            border border-solid border-gray-300
-                            rounded
-                            transition
-                            ease-in-out
-                            focus:text-gray-700 focus:bg-white focus:border-[#92828d] focus:outline-none
+                            value={formData.request}
+                            id="request"
+                            placeholder="Suggestions for AI"
+                            className="
+                            form-control 
+                            m-0 block 
+                            w-full rounded 
+                            border border-solid border-gray-300 p-2 
+                            text-gray-700 
+                            transition 
+                            ease-in-out focus:border-[#92828d] 
+                            focus:bg-white focus:text-gray-700 
+                            focus:outline-none
                             "
-                    />
-                </div>
-                <button
-                    onClick={(e) => handleSubmit(e)}
-                    className='bg-[#92828d] hover:bg-[#6B5A7D] text-white font-bold py-2 px-4 rounded'
-                    type="submit" value="submit">
-                    Submit
-                </button>
-            </form>
-
+                        />
+                    </div>
+                    <button
+                        onClick={(e) => handleSubmit(e)}
+                        className='
+                            rounded bg-pink-600 py-2 px-4 font-bold
+                            text-white hover:bg-pink-800
+                        '
+                        type="submit" value="submit">
+                        Submit
+                    </button>
+                </form>
+            </div>
         </>
 
 
